@@ -1,0 +1,30 @@
+# ─── Beautiful Jekyll 主题配置 ────────────────────────
+# GitHub Pages 通过 remote_theme 直接使用该主题，无需本地构建
+
+remote_theme: daattali/beautiful-jekyll
+
+# 站点信息
+title: 车东 · Che Dong
+author: Che Dong
+description: 互联网搜索与 SEO 领域的实践者、中国早期 Blogger —— 「为而不有」
+
+# 顶部导航栏
+navbar-links:
+  博客 Blog: "https://www.chedong.com"
+  LinkedIn: "https://www.linkedin.com/in/chedong"
+  GitHub: "https://github.com/chedong"
+
+# 页脚社交链接
+social-network-links:
+  github: chedong
+  linkedin: chedong
+  email: chedong@gmail.com
+
+# 评论（先关闭，后续需要可接入 giscus）
+comments: false
+
+# 主题语言
+lang: zh-CN
+
+# 时区
+timezone: America/Vancouver
