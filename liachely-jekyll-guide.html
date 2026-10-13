@@ -1,0 +1,327 @@
+<title>Lia's Archive 网站手册</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+  :root{
+    --paper:#FBF4E6; --ink:#352F24; --muted:#85795F;
+    --sun:#E8782B; --sun-soft:#FBE3C6; --sun-ink:#8A4A12; --link:#B25714;
+    --leaf:#2F7D52; --leaf-soft:#E2EFE2;
+    --card:#FFFDF5; --line:#E6D7B4;
+    --code-bg:#2C2820; --code-ink:#F5ECD8; --code-head:#3A352B;
+    --shadow:0 1px 2px rgba(90,70,30,.06), 0 10px 30px -14px rgba(90,70,30,.18);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --paper:#1D1911; --ink:#F0E7D2; --muted:#B3A584;
+      --sun:#FF9A4D; --sun-soft:#4A3318; --sun-ink:#FFC38A; --link:#FFB370;
+      --leaf:#5CC08A; --leaf-soft:#23351F;
+      --card:#262017; --line:#3A3224;
+      --code-bg:#14110A; --code-ink:#F0E7D2; --code-head:#241F15;
+      --shadow:0 1px 2px rgba(0,0,0,.25), 0 12px 32px -14px rgba(0,0,0,.5);
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#1D1911; --ink:#F0E7D2; --muted:#B3A584;
+    --sun:#FF9A4D; --sun-soft:#4A3318; --sun-ink:#FFC38A; --link:#FFB370;
+    --leaf:#5CC08A; --leaf-soft:#23351F;
+    --card:#262017; --line:#3A3224;
+    --code-bg:#14110A; --code-ink:#F0E7D2; --code-head:#241F15;
+    --shadow:0 1px 2px rgba(0,0,0,.25), 0 12px 32px -14px rgba(0,0,0,.5);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:"Nunito Sans",system-ui,-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;font-size:1.03rem;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:800px;margin:0 auto;padding:3rem 1.5rem 5rem}
+
+  a{color:var(--link);text-decoration:none;border-bottom:1.5px solid color-mix(in srgb, var(--link) 40%, transparent)}
+  a:hover{color:var(--sun)}
+  code,pre{font-family:"IBM Plex Mono",ui-monospace,SFMono-Regular,Menlo,monospace}
+
+  /* ── Hero ─────────────────────────────── */
+  .hero{position:relative;text-align:center;padding:1rem 0 2.6rem;margin-bottom:.4rem;
+    background-image:radial-gradient(color-mix(in srgb, var(--sun) 18%, transparent) 1.2px, transparent 1.3px);
+    background-size:22px 22px;background-position:center top;
+    animation:fadeUp .7s ease both}
+  .eyebrow{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin:0 0 1.1rem}
+  .hero h1{margin:0;font-family:"Baloo 2",system-ui,sans-serif;font-size:clamp(2.3rem,6.5vw,3.6rem);line-height:1.08;font-weight:800;letter-spacing:.01em;text-wrap:balance}
+  .hl{position:relative;white-space:nowrap}
+  .hl::after{content:"";position:absolute;left:-.02em;right:-.02em;bottom:.08em;height:.28em;z-index:-1;background:linear-gradient(to top,var(--sun-soft) 0 62%,transparent 62% 100%);border-radius:3px}
+  .hero .sub{max-width:36em;margin:1.1rem auto 0;color:var(--muted);font-size:1.06rem}
+  .site-card{margin:1.9rem auto 0;max-width:34em;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1rem 1.3rem;box-shadow:var(--shadow);display:flex;align-items:center;justify-content:space-between;gap:1rem;text-align:left;flex-wrap:wrap}
+  .site-card .url{font-family:"IBM Plex Mono",monospace;font-size:.98rem;color:var(--ink);font-weight:500}
+  .site-card .note{font-size:.86rem;color:var(--muted)}
+  .site-card .go{font-weight:700;color:var(--link);font-size:.95rem}
+
+  /* ── Sections ─────────────────────────── */
+  section{margin-top:3.4rem}
+  .kicker{font-family:"IBM Plex Mono",monospace;font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--sun-ink);margin:0 0 .6rem}
+  h2{font-family:"Baloo 2",system-ui,sans-serif;font-size:1.65rem;margin:0 0 1rem;line-height:1.2;text-wrap:balance}
+  h3{font-family:"Nunito Sans",system-ui,sans-serif;font-size:1.13rem;margin:0 0 .5rem;font-weight:800}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.6rem 1.7rem;box-shadow:var(--shadow);margin-top:1.2rem}
+  .step-head{display:flex;align-items:center;gap:1rem;margin-bottom:.4rem}
+  .step-num{flex:0 0 auto;width:3rem;height:3rem;border-radius:50%;background:var(--sun-soft);color:var(--sun-ink);font-family:"Baloo 2",system-ui,sans-serif;font-size:1.5rem;font-weight:800;display:flex;align-items:center;justify-content:center}
+  .step-head h3{font-family:"Baloo 2",system-ui,sans-serif;font-size:1.35rem;margin:0;font-weight:700}
+  .card > p{color:var(--muted);margin:.6rem 0 0}
+  .card > p b{color:var(--ink)}
+
+  /* ── Flow (一眼看懂) ─────────────────── */
+  .flow{display:flex;align-items:stretch;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem}
+  .flow-step{flex:1 1 150px;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem;text-align:center}
+  .flow-step .emo{font-size:1.6rem;display:block;margin-bottom:.4rem}
+  .flow-step .t{font-weight:800;font-size:.98rem}
+  .flow-step .d{font-size:.82rem;color:var(--muted);margin-top:.25rem}
+  .flow-arrow{align-self:center;color:var(--sun);font-size:1.2rem;font-weight:800;padding:0 .1rem}
+  @media (max-width:560px){.flow-arrow{display:none}}
+
+  /* ── Code blocks ─────────────────────── */
+  figure.code{margin:1.1rem 0 0;border-radius:14px;overflow:hidden;box-shadow:var(--shadow)}
+  figure.code figcaption{display:flex;align-items:center;justify-content:space-between;gap:1rem;background:var(--code-head);padding:.5rem .9rem}
+  figure.code .file{font-family:"IBM Plex Mono",monospace;font-size:.8rem;color:var(--code-ink);opacity:.85}
+  figure.code .copy{font:inherit;font-size:.78rem;font-weight:700;color:var(--code-ink);background:transparent;border:1.5px solid color-mix(in srgb, var(--code-ink) 45%, transparent);border-radius:8px;padding:.18rem .7rem;cursor:pointer;transition:background .15s}
+  figure.code .copy:hover{background:rgba(255,255,255,.12)}
+  figure.code pre{margin:0;padding:1rem 1.1rem;overflow-x:auto;background:var(--code-bg);color:var(--code-ink);font-size:.85rem;line-height:1.65}
+
+  /* ── Callout / check ─────────────────── */
+  .callout{display:flex;gap:.75rem;background:var(--sun-soft);border:1px solid color-mix(in srgb, var(--sun) 30%, transparent);border-radius:12px;padding:.85rem 1rem;margin-top:1rem;font-size:.96rem}
+  .callout::before{content:"💡";flex:0 0 auto}
+  .callout.good{background:var(--leaf-soft);border-color:color-mix(in srgb, var(--leaf) 35%, transparent)}
+  .callout.good::before{content:"✅"}
+  .callout.warn{background:var(--sun-soft);border-color:color-mix(in srgb, var(--sun) 40%, transparent)}
+  .callout code{background:color-mix(in srgb, var(--code-bg) 14%, transparent);padding:.1em .35em;border-radius:6px;font-size:.9em}
+
+  ul.check{list-style:none;padding:0;margin:1rem 0 0}
+  ul.check li{position:relative;padding-left:1.9em;margin:.55em 0}
+  ul.check li::before{content:"✓";position:absolute;left:0;top:0;color:var(--leaf);font-weight:800}
+  ul.plain{padding-left:1.2em;margin:1rem 0 0}
+  ul.plain li{margin:.5em 0}
+  ul.plain li::marker{color:var(--sun)}
+
+  /* ── Table ───────────────────────────── */
+  .tblwrap{overflow-x:auto;margin-top:1rem;border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow)}
+  table{width:100%;border-collapse:collapse;font-size:.95rem;min-width:430px}
+  th,td{text-align:left;padding:.6rem .9rem;border-bottom:1px solid var(--line)}
+  tr:last-child td{border-bottom:none}
+  th{background:var(--sun-soft);color:var(--sun-ink);font-weight:800;font-size:.88rem}
+  td code{background:color-mix(in srgb, var(--code-bg) 12%, transparent);padding:.08em .4em;border-radius:6px;font-size:.86em}
+
+  /* ── FAQ ─────────────────────────────── */
+  details.faq{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-top:.7rem;padding:.05rem 0;box-shadow:var(--shadow)}
+  details.faq summary{cursor:pointer;font-weight:800;padding:.85rem 1.1rem;list-style:none;display:flex;align-items:center;justify-content:space-between}
+  details.faq summary::-webkit-details-marker{display:none}
+  details.faq summary::after{content:"+";color:var(--sun);font-size:1.2rem;font-weight:800;margin-left:1rem;transition:transform .15s}
+  details.faq[open] summary::after{transform:rotate(45deg)}
+  details.faq .a{padding:0 1.1rem 1rem;color:var(--muted);font-size:.97rem}
+
+  /* ── Rules / footer ─────────────────── */
+  .rules{border:1.5px dashed color-mix(in srgb, var(--sun) 55%, transparent);background:var(--card);border-radius:16px;padding:1.3rem 1.5rem;margin-top:1.4rem}
+  .rules h3{font-family:"Baloo 2",system-ui,sans-serif;font-size:1.15rem;font-weight:700}
+  footer{margin-top:4rem;text-align:center;color:var(--muted);font-size:.92rem;padding-top:1.5rem;border-top:1px solid var(--line)}
+
+  :focus-visible{outline:2.5px solid var(--sun);outline-offset:2px;border-radius:6px}
+  @keyframes fadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+</style>
+
+<header class="hero">
+  <p class="eyebrow">liachely.github.io · Lia's Archive · 网站维护手册</p>
+  <h1>我的网站，<span class="hl">我自己管</span></h1>
+  <p class="sub">你的网站已经上线了！这本小手册教你怎么往里面加内容——写新文章、改页面、加项目，以及搞懂「push 一下就自动发布」是怎么回事。</p>
+  <div class="site-card">
+    <span class="url">https://liachely.github.io/</span>
+    <span class="note">已经上线，打开就是你的主页</span>
+    <a class="go" href="https://liachely.github.io/" target="_blank" rel="noopener">去看看 →</a>
+  </div>
+</header>
+
+<div class="wrap">
+
+  <section>
+    <p class="kicker">先懂一件事</p>
+    <h2>你的网站是怎么自动发布的</h2>
+    <p style="color:var(--muted)">你只在一个地方工作：<b style="color:var(--ink)">main 分支</b>。剩下的交给机器。</p>
+    <div class="flow">
+      <div class="flow-step"><span class="emo">✍️</span><span class="t">你在 main 分支改</span><span class="d">写文章、改页面，存好提交</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span class="emo">🤖</span><span class="t">GitHub Actions 自动构建</span><span class="d">deploy.yml 用 Jekyll 把内容变成网页</span></div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-step"><span class="emo">🌐</span><span class="t">gh-pages 上线</span><span class="d">成品放到 gh-pages 分支，网站自动更新</span></div>
+    </div>
+    <div class="callout">两个分支分清楚：<code>main</code> 是你的「原料仓库」（你只碰这里）；<code>gh-pages</code> 是机器「做好的菜」（<b>不要手动去碰它</b>）。</div>
+  </section>
+
+  <section>
+    <p class="kicker">第一步 · 最常用</p>
+    <div class="card">
+      <div class="step-head"><div class="step-num">1</div><h3>写一篇新博客</h3></div>
+      <p>所有文章放在 <b>_posts</b> 文件夹。在 GitHub 网页上新建文件时，把文件名写成 <code>_posts/日期-标题.md</code>，会自动进到文件夹里。</p>
+
+      <div class="callout warn">⚠️ 文件名必须是 <code>年-月-日-标题.md</code>，比如 <code>2026-09-24-my-first-post.md</code>。<b>日期写错或漏掉，文章就不会发布</b>，而且不会报错——这是新手最容易踩的坑。</div>
+
+      <figure class="code">
+        <figcaption><span class="file">新建文件：_posts/2026-09-24-my-first-post.md</span><button class="copy" type="button">复制</button></figcaption>
+        <pre><code>---
+layout: post
+title: 我的第一篇文章
+date: 2026-09-24 00:00:00+0800
+description: 一句话介绍这篇文章
+tags: 生活 记录
+categories: sample-posts
+---
+
+正文从这里开始写。
+
+今天给网站写了第一篇文章，真开心 🎉</code></pre>
+      </figure>
+
+      <h3 style="margin-top:1.4rem">写文章用的“小符号”（Markdown 速查表）</h3>
+      <div class="tblwrap">
+        <table>
+          <thead><tr><th>我想做</th><th>就这样写</th></tr></thead>
+          <tbody>
+            <tr><td>标题（最大）</td><td><code># 这是大标题</code></td></tr>
+            <tr><td>标题（小一点）</td><td><code>## 这是二级标题</code></td></tr>
+            <tr><td>加粗</td><td><code>**重点文字**</code></td></tr>
+            <tr><td>列表</td><td><code>- 第一件事</code></td></tr>
+            <tr><td>链接</td><td><code>[文字](https://链接)</code></td></tr>
+            <tr><td>图片</td><td><code>![说明](/assets/img/图片.jpg)</code></td></tr>
+            <tr><td>引用</td><td><code>&gt; 一句想引用的话</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="callout good">图片要放进 <code>assets/img/</code> 文件夹（上传图片时选这个目录），然后在文章里写上图的路径。</div>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">第二步</p>
+    <div class="card">
+      <div class="step-head"><div class="step-num">2</div><h3>改页面、加项目</h3></div>
+      <p>你的网站页面在 <b>_pages</b> 文件夹（比如 <code>about-lia.md</code>、<code>photography.md</code>、<code>atlas.md</code>），项目在 <b>_projects</b>（一个文件一个项目）。它们的开头都有一段「front matter」——就是上下各一行 <code>---</code> 之间的信息，告诉网站这个页面叫什么、放在导航哪里。</p>
+
+      <figure class="code">
+        <figcaption><span class="file">页面的开头长这样（_pages/ 里的文件）</span><button class="copy" type="button">复制</button></figcaption>
+        <pre><code>---
+layout: page
+title: About
+permalink: /about/
+nav: true
+nav_order: 4
+---
+这里是页面的正文。</code></pre>
+      </figure>
+
+      <figure class="code">
+        <figcaption><span class="file">项目的开头长这样（_projects/ 里的文件）</span><button class="copy" type="button">复制</button></figcaption>
+        <pre><code>---
+layout: page
+title: 我的项目
+description: 一句话介绍
+img: assets/img/12.jpg
+importance: 1
+category: work
+---
+这是项目的详细介绍。</code></pre>
+      </figure>
+
+      <ul class="plain">
+        <li><b>新建页面</b>：在 <code>_pages/</code> 新建 <code>xxx.md</code>，front matter 里写 <code>permalink</code>（网址路径）和 <code>nav: true</code>（要不要出现在顶部导航）</li>
+        <li><b>新建项目</b>：在 <code>_projects/</code> 新建 <code>1_名字.md</code>，<code>importance</code> 数字越大越靠前，<code>category</code> 决定它归到哪一组</li>
+        <li>正文里写图片时，用三行并排的写法（看现在项目的正文例子就能学会）</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">第三步</p>
+    <div class="card">
+      <div class="step-head"><div class="step-num">3</div><h3>改网站的名字和设置</h3></div>
+      <p>网站的「身份证」都在 <b>_config.yml</b> 里：标题、介绍、导航、评论、主题选项都在这里。想改名字，就在里面找 <code>title:</code> 那一行改掉。</p>
+      <ul class="plain">
+        <li>改了 <code>_config.yml</code>，同样 commit + push，等 1–2 分钟生效</li>
+        <li>改设置前最好先复制一份备份，或者只改一行、确认没坏再加</li>
+        <li>拿不准时，先在这本手册的「本地预览」里看效果再发布</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">进阶 · 可选</p>
+    <div class="card">
+      <div class="step-head"><div class="step-num">＋</div><h3>先在电脑上预览（改完立刻看到）</h3></div>
+      <p>不想每次改完都等网页刷新？可以在电脑上把网站「跑」起来。让爸爸帮你装好 Ruby 之后，在网站文件夹里打开终端：</p>
+      <figure class="code">
+        <figcaption><span class="file">在终端里输入</span><button class="copy" type="button">复制</button></figcaption>
+        <pre><code>bundle install
+bundle exec jekyll serve</code></pre>
+      </figure>
+      <ul class="plain">
+        <li>浏览器打开 <b>http://localhost:4000</b> 就能预览（只看网页，不占网上的）</li>
+        <li>预览满意了，再 commit + push，网上才会更新</li>
+        <li>如果页面样式没出来，可能是缺少前端依赖——让爸爸再跑一次 <code>npm ci</code> 就好</li>
+      </ul>
+    </div>
+  </section>
+
+  <section>
+    <p class="kicker">遇到问题看这里</p>
+    <h2>常见问题</h2>
+    <details class="faq">
+      <summary>改了东西，网页怎么没变化？</summary>
+      <div class="a">① 刚 push 完要等 1–2 分钟（Actions 在后台工作）；② 去仓库的 <b>Actions</b> 页面看有没有变绿（绿=成功，红=有问题，点开看哪里红了）；③ 检查文章文件名是不是 <code>年-月-日-标题.md</code> 格式。</div>
+    </details>
+    <details class="faq">
+      <summary>图片不显示怎么办？</summary>
+      <div class="a">检查两件事：图片真的上传到 <code>assets/img/</code> 了吗？文章里写的路径和文件名完全一样吗（大小写也要一样）？</div>
+    </details>
+    <details class="faq">
+      <summary>文件名可以用中文吗？</summary>
+      <div class="a">可以，但推荐用英文或拼音，避免出奇怪的问题。日期必须写成 <code>2026-09-24</code> 这种格式。</div>
+    </details>
+    <details class="faq">
+      <summary>_posts 里那些 2015 年、2023 年的文章是什么？</summary>
+      <div class="a">那是模板自带的<b>示例文章</b>（教你怎么用各种功能），不是你的内容。以后可以一个个删掉，换成你自己写的。</div>
+    </details>
+    <details class="faq">
+      <summary>不小心改了 gh-pages 分支怎么办？</summary>
+      <div class="a">别慌——它每次 push main 都会被自动重新生成。最保险的做法是平时根本不碰它；真的手滑了，让爸爸帮你在 Actions 里重新跑一次部署就行。</div>
+    </details>
+  </section>
+
+  <section>
+    <div class="rules">
+      <h3>🗒️ 几条小规则（记住了就少踩坑）</h3>
+      <ul class="check">
+        <li>只在 <b>main</b> 分支改东西</li>
+        <li>不手动碰 <b>gh-pages</b> 分支（那是机器管的地盘）</li>
+        <li>文章命名 <code>2026-09-24-标题.md</code>，日期必须写对</li>
+        <li>图片统一放 <code>assets/img/</code></li>
+        <li>大改动先在本地预览，满意再发布</li>
+        <li>拿不准就小改一步、看效果，再走下一步</li>
+      </ul>
+    </div>
+  </section>
+
+  <footer>
+    你的网站是你的小天地。写错了随时可以改回来——放心大胆地试。&nbsp;·&nbsp; liachely.github.io
+  </footer>
+
+</div>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var code = btn.closest('.code').querySelector('code').textContent;
+      function done(){ btn.textContent = '已复制 ✓'; setTimeout(function(){ btn.textContent = '复制'; }, 1600); }
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(code).then(done, function(){ fallback(); });
+      } else { fallback(); }
+      function fallback(){
+        var ta = document.createElement('textarea');
+        ta.value = code; ta.style.position = 'fixed'; ta.style.opacity = '0';
+        document.body.appendChild(ta); ta.select();
+        try { document.execCommand('copy'); done(); } catch(e){}
+        document.body.removeChild(ta);
+      }
+    });
+  });
+</script>
